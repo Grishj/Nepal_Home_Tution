@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, CheckCircle2, FileText, Loader2, Send, MessageCircle, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "../components/Reveal";
@@ -89,7 +89,30 @@ const inputFields = [
 
 const ErrorText = ({ message }: { message?: string }) => (message ? <p className="field-error">{message}</p> : null);
 
+function findMatchingOption(value: string, options: readonly string[]): string | undefined {
+  const lower = value.toLowerCase();
+  const exact = options.find((o) => o.toLowerCase() === lower);
+  if (exact) return exact;
+  const tokens = lower.split(/[\s,/-]+/).filter(Boolean);
+  return options.find((opt) => {
+    const optTokens = opt.toLowerCase().split(/[\s,/-]+/).filter(Boolean);
+    return tokens.some((t) => optTokens.includes(t));
+  });
+}
+
 export default function BecomeTutor() {
+  const [searchParams] = useSearchParams();
+  const salaryParam = searchParams.get("salary");
+  const defaultSalary = salaryParam ? (isNaN(Number(salaryParam)) ? undefined : Number(salaryParam)) : undefined;
+
+  const subjectParam = searchParams.get("subject");
+  const classParam = searchParams.get("class");
+
+  const defaultSubjects = subjectParam && tutorSubjectOptions.includes(subjectParam) ? [subjectParam] : [];
+  const matchedClass = classParam ? findMatchingOption(classParam, classOptions) : undefined;
+  const defaultClasses = matchedClass ? [matchedClass] : [];
+  const defaultLanguages = ["Nepali"];
+
   const submittedRef = useRef(false);
   const whatsappTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -102,13 +125,14 @@ export default function BecomeTutor() {
   } = useForm<TutorApplicationValues>({
     resolver: zodResolver(tutorApplicationSchema),
     defaultValues: {
-      subjects: [],
-      classes: [],
-      languagesKnown: [],
+      subjects: defaultSubjects,
+      classes: defaultClasses,
+      languagesKnown: defaultLanguages,
       teachingMode: "Both",
       email: "",
       agreePolicy: false,
       cv: null as any,
+      expectedMonthlySalary: defaultSalary,
     },
   });
 
@@ -262,6 +286,7 @@ export default function BecomeTutor() {
                         type={"type" in field ? field.type : "text"}
                         className="form-field"
                         placeholder={field.placeholder}
+                        readOnly={field.name === "expectedMonthlySalary" && defaultSalary !== undefined}
                         aria-invalid={Boolean(errors[field.name as keyof TutorApplicationValues])}
                         {...register(field.name as any)}
                       />

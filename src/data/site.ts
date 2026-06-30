@@ -28,11 +28,11 @@ export const contact = {
   phone: import.meta.env.VITE_OWNER_PHONE || "+977 9810754805",
   phoneHref: import.meta.env.VITE_OWNER_PHONE_HREF || "+9779810754805",
   whatsapp: import.meta.env.VITE_WHATSAPP_NUMBER || "9779810754805",
-  email: import.meta.env.VITE_OWNER_EMAIL || "joshigrish058@gmail.com",
+  email: import.meta.env.VITE_OWNER_EMAIL || "joshisanjaya049@gmail.com",
   formEmail:
     import.meta.env.VITE_FORMSUBMIT_EMAIL ||
     import.meta.env.VITE_OWNER_EMAIL ||
-    "joshigrish058@gmail.com",
+    "joshisanjaya049@gmail.com",
   facebook:
     import.meta.env.VITE_FACEBOOK_URL ||
     "https://www.facebook.com/share/1HcZcLV1DT/",
@@ -61,6 +61,7 @@ export const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Vacancies", href: "/vacancies" },
   { label: "Commission", href: "/commission" },
   { label: "Become Tutor", href: "/become-tutor" },
   { label: "Contact", href: "/contact" },
