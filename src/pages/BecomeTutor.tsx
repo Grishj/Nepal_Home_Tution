@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AlertCircle, CheckCircle2, FileText, Loader2, Send, MessageCircle, X } from "lucide-react";
+import { AlertCircle, CheckCircle2, Coins, FileText, Loader2, Send, MessageCircle, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { Link, useSearchParams } from "react-router-dom";
@@ -84,7 +84,7 @@ const inputFields = [
   { name: "teachingExperience", label: "Teaching Experience (Years) *", placeholder: "e.g. 2", type: "number" },
   { name: "preferredTeachingArea", label: "Preferred Teaching Area *", placeholder: "Baneshwor, Lalitpur, Online..." },
   { name: "availableTime", label: "Available Time *", placeholder: "Morning / Evening / Weekends" },
-  { name: "expectedMonthlySalary", label: "Expected Monthly Salary (Rs.) *", placeholder: "e.g. 15000", type: "number" },
+  { name: "expectedMonthlySalary", label: "Expected Monthly Salary *", placeholder: "e.g. 15000", type: "number" },
 ] as const;
 
 const ErrorText = ({ message }: { message?: string }) => (message ? <p className="field-error">{message}</p> : null);
@@ -279,6 +279,9 @@ export default function BecomeTutor() {
                   {inputFields.map((field) => (
                     <div key={field.name}>
                       <label className="form-label" htmlFor={field.name}>
+                        {field.name === "expectedMonthlySalary" && (
+                          <Coins className="-ml-0.5 mr-1.5 inline h-4 w-4 text-slate-500" />
+                        )}
                         {field.label}
                       </label>
                       <input

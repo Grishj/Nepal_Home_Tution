@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Clock, DollarSign, GraduationCap, MapPin, Share2, User } from "lucide-react";
+import { BriefcaseBusiness, Clock, Coins, GraduationCap, MapPin, Share2, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import type { Vacancy } from "../types/vacancy";
@@ -56,7 +56,7 @@ export function VacancyCard({ vacancy }: VacancyCardProps) {
           <span className="font-medium">{vacancy.location}</span>
         </div>
         <div className="flex items-center gap-1.5 text-slate-500">
-          <DollarSign className="h-3.5 w-3.5 shrink-0 text-slate-400" />
+          <Coins className="h-3.5 w-3.5 shrink-0 text-slate-400" />
           <span className="font-medium">Rs. {vacancy.salary.toLocaleString()}</span>
         </div>
         <div className="flex items-center gap-1.5 text-slate-500">
