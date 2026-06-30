@@ -200,24 +200,34 @@ export const howItWorks = [
   "Regular tuition starts.",
 ];
 
-export const testimonials = [
+export interface Testimonial {
+  label: string;
+  quote: string;
+  name: string;
+  avatar: string;
+}
+
+export const testimonials: Testimonial[] = [
   {
     label: "Happy Parents",
     quote:
       "The tutor understood our child's weak areas quickly and the regular updates helped us feel confident.",
-    name: "Parent from Kathmandu",
+    name: "Radha Sharma",
+    avatar: "https://i.pravatar.cc/60?u=radha-sharma",
   },
   {
     label: "Happy Students",
     quote:
       "My Math lessons became easier because the tutor explained every topic step by step.",
-    name: "SEE Student",
+    name: "Aarav Thapa",
+    avatar: "https://i.pravatar.cc/60?u=aarav-thapa",
   },
   {
     label: "Happy Tutors",
     quote:
       "The process was transparent, the parent matched my subjects, and the commission policy was clear.",
-    name: "Science Tutor",
+    name: "Prakash Adhikari",
+    avatar: "https://i.pravatar.cc/60?u=hari-poudel",
   },
 ];
 

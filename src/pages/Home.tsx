@@ -7,6 +7,7 @@ import {
   GraduationCap,
   MessageCircle,
   Phone,
+  Quote,
   Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -201,17 +202,50 @@ export default function Home() {
           <SectionHeader eyebrow="Testimonials" title="Trusted by families and teachers" />
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {testimonials.map((testimonial, index) => (
-              <Reveal key={testimonial.label} delay={index * 0.07} className="card-hover rounded-lg border border-white bg-white p-6 shadow-sm">
+              <Reveal key={testimonial.label} delay={index * 0.07} className="card-hover relative rounded-lg border border-white bg-white p-6 shadow-sm">
+                <Quote className="absolute right-5 top-5 h-8 w-8 text-blue-100" />
                 <p className="text-sm font-extrabold text-brand-blue">{testimonial.label}</p>
                 <p className="mt-4 leading-8 text-slate-700">"{testimonial.quote}"</p>
-                <p className="mt-5 font-bold text-slate-950">{testimonial.name}</p>
+                <div className="mt-5 flex items-center gap-3">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="h-10 w-10 rounded-full border-2 border-slate-100 object-cover"
+                  />
+                  <p className="font-bold text-slate-950">{testimonial.name}</p>
+                </div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="section-surface py-20">
+        <div className="site-container">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto mb-6 h-20 w-20 overflow-hidden rounded-full border-4 border-blue-100 shadow-md">
+              <img
+                src="/founder.jpg"
+                alt="Sanjaya Joshi"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <Quote className="mx-auto mb-4 h-10 w-10 text-blue-200" />
+            <blockquote className="text-xl leading-relaxed text-slate-700 sm:text-2xl sm:leading-9">
+              "I started Nepal Home Tuition Center to bridge the gap between dedicated teachers and
+              students who need personalized attention. Every child deserves a tutor who understands
+              their unique learning style, and every teacher deserves a fair platform to share their
+              knowledge. This is my commitment to quality education across Nepal."
+            </blockquote>
+            <div className="mt-6">
+              <p className="text-lg font-extrabold text-slate-950">Sanjaya Joshi</p>
+              <p className="text-sm text-slate-500">Founder, Nepal Home Tuition Center</p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-white py-20 lg:pt-0">
         <div className="site-container">
           <Reveal className="mesh-surface overflow-hidden rounded-lg border border-blue-100 p-8 shadow-soft sm:p-10 lg:p-12">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
