@@ -27,7 +27,7 @@ export function VacancyFilters({ filters, onFilterChange }: VacancyFiltersProps)
           placeholder="Search subject, location, or class..."
           value={filters.search}
           onChange={(e) => update("search", e.target.value)}
-          className="form-field w-full pl-10 pr-4"
+          className="form-field w-full !pl-10 pr-4"
           aria-label="Search vacancies"
         />
       </div>

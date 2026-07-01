@@ -1,6 +1,7 @@
-import { BriefcaseBusiness, Clock, Coins, GraduationCap, MapPin, Share2, User } from "lucide-react";
+import { Clock, Coins, GraduationCap, MapPin, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ShareDropdown } from "./ShareDropdown";
 import type { Vacancy } from "../types/vacancy";
 
 interface VacancyCardProps {
@@ -8,7 +9,8 @@ interface VacancyCardProps {
 }
 
 export function VacancyCard({ vacancy }: VacancyCardProps) {
-  const whatsappMessage = `Hello Nepal Home Tuition Center, I am interested in the ${vacancy.subject} vacancy (${vacancy.id}) for ${vacancy.class} at ${vacancy.location}.`;
+  const applyUrl = `${window.location.origin}/become-tutor?salary=${vacancy.salary}&subject=${encodeURIComponent(vacancy.subject)}&class=${encodeURIComponent(vacancy.class)}`;
+  const shareText = `📢 *Vacancy Alert!*\n\n📚 *Subject:* ${vacancy.subject}\n🎓 *Class:* ${vacancy.class}\n📍 *Location:* ${vacancy.location}\n💰 *Salary:* Rs. ${vacancy.salary.toLocaleString()}\n👤 *Gender:* ${vacancy.teacherGender}\n⏳ *Experience:* ${vacancy.experience}\n🕒 *Duration:* ${vacancy.duration}`;
 
   return (
     <motion.div
@@ -90,15 +92,7 @@ export function VacancyCard({ vacancy }: VacancyCardProps) {
         >
           Apply Now
         </Link>
-        <a
-          href={`https://wa.me/9779810754805?text=${encodeURIComponent(whatsappMessage)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-brand-success focus-ring"
-          aria-label="Share via WhatsApp"
-        >
-          <Share2 className="h-4 w-4" />
-        </a>
+        <ShareDropdown shareUrl={applyUrl} shareText={shareText} />
       </div>
     </motion.div>
   );
