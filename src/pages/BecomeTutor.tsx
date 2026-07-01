@@ -121,6 +121,7 @@ export default function BecomeTutor() {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<TutorApplicationValues>({
     resolver: zodResolver(tutorApplicationSchema),
@@ -192,6 +193,7 @@ export default function BecomeTutor() {
     const iframe = iframeRef.current;
     const onIframeLoad = () => {
       iframe?.removeEventListener("load", onIframeLoad);
+      reset();
       setShowSuccess(true);
 
       whatsappTimerRef.current = setTimeout(() => {
